@@ -26,7 +26,7 @@ SECRET_KEY = '95e3483f7db004c32c4c386b34602091'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://institute-application-backend.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

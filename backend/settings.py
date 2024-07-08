@@ -96,8 +96,8 @@ DATABASES = {
         'PORT':'5432',
     }
 }
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+#database_url = os.environ.get("DATABASE_URL")
+#DATABASES['default'] = dj_database_url.parse(database_url)
 #DATABASES["default"] = dj_database_url.parse("postgresql://institute_e5fn_user:xzXMl5yTenpWVmBM3ohfvNcE2F6gkcYk@dpg-cq5r0n08fa8c738bukh0-a.oregon-postgres.render.com/institute_e5fn") 
 
 

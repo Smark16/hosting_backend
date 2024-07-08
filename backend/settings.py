@@ -89,7 +89,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'institute',
+        'NAME': 'institute_e5fn',
         'USER':'institute_e5fn_user',
         'PASSWORD':'xzXMl5yTenpWVmBM3ohfvNcE2F6gkcYk',
         'HOST':'dpg-cq5r0n08fa8c738bukh0-a.oregon-postgres.render.com',

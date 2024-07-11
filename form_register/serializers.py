@@ -5,6 +5,7 @@ from rest_framework_simplejwt.tokens import Token
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+from django.db import IntegrityError
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,21 +50,23 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
         password = validated_data.pop('password')
         validated_data.pop('confirm_password')
-        
-        user = User.objects.create(**user_data)
-        user.set_password(password)
-        user.save()
+        try:
+            user = User.objects.create(**user_data)
+            user.set_password(password)
+            user.save()
 
-        user_account = UserAccount.objects.create(
-            user=user,
-            middle_name=validated_data['middle_name'],
-            mobile=validated_data['mobile'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            email=validated_data['email']
-        )
+            user_account = UserAccount.objects.create(
+                user=user,
+                middle_name=validated_data['middle_name'],
+                mobile=validated_data['mobile'],
+                first_name=validated_data['first_name'],
+                last_name=validated_data['last_name'],
+                email=validated_data['email']
+            )
+            return user_account
+        except IntegrityError:
+          raise serializers.ValidationError({"username": "Username already exists."})
         
-        return user_account
 # basic info serializer
 class basicSerializer(serializers.ModelSerializer):
     class Meta:

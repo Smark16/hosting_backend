@@ -55,7 +55,7 @@ class PhysicalAddress(models.Model):
      Sub_county = models.CharField(max_length=200)
      Parish = models.CharField(max_length=200)
      Village = models.CharField(max_length=100)
-     GPS_Points = models.CharField(max_length=100)
+     GPS_Points = models.CharField(max_length=100, null=True, blank=True)
 
 class Capacity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

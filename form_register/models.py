@@ -60,6 +60,7 @@ class PhysicalAddress(models.Model):
 class Capacity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Date_Of_Registration = models.DateField(null=True, blank=True)
+    certificate = models.FileField(upload_to='files/')
     Registration_Number = models.CharField(max_length=200, null=True, blank=True)
     Name_Of_The_Contact_Person = models.CharField(max_length=200, null=True, blank=True)
     TelNo_Of_The_Contact_Person = models.PositiveBigIntegerField(validators=[MaxValueValidator(999999999999)], null=True, blank=True)
@@ -86,10 +87,8 @@ class EmployeeCategory(models.Model):
     contract_female = models.PositiveIntegerField(default=0)
     casual_male = models.PositiveIntegerField(default=0)
     casual_female = models.PositiveIntegerField(default=0)
-    self_employed_male = models.PositiveIntegerField(default=0)
-    self_employed_female = models.PositiveIntegerField(default=0)
-    other_male = models.PositiveIntegerField(default=0)
-    other_female = models.PositiveIntegerField(default=0)
+    consultants_male = models.PositiveIntegerField(default=0)
+    consultants_female = models.PositiveIntegerField(default=0)
 
     @property
     def total(self):
@@ -112,6 +111,7 @@ class Trade(models.Model):
     expertise = models.TextField()
     staff_mentoring = models.TextField()
     infrastructure = models.TextField()
+    sector_description = models.TextField()
 
     def __str__(self):
         return self.targeted_trade
@@ -132,13 +132,13 @@ class HostingExperience(models.Model):
 
 class WorkPlacementCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    hosting_experience = models.ForeignKey(HostingExperience, related_name='courses', on_delete=models.CASCADE)
-    sn = models.CharField(max_length=100)
-    course_name = models.CharField(max_length=255)
+    trade = models.ForeignKey(Trade, related_name='courses', on_delete=models.CASCADE)
+    module_code = models.CharField(max_length=100)
+    module_name = models.CharField(max_length=255)
     duration = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.sn} - {self.course_name} ({self.duration})"
+        return f"{self.module_code} - {self.module_name} ({self.duration})"
 
 class AdditionalInformation(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)

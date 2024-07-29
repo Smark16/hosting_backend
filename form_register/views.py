@@ -29,6 +29,9 @@ import os
 from django.conf import settings
 from django.utils.dateparse import parse_duration
 from django.db.models import Avg
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 class ObtainPairView(TokenObtainPairView):
@@ -173,6 +176,8 @@ class updatePhysical(APIView):
 class AllCapacity(generics.ListAPIView):
     queryset = Capacity.objects.all()
     serializer_class = CapacitySerializer
+    parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [AllowAny]
 
 class post_Capacity(APIView):
     serializer_class = CapacitySerializer
@@ -200,6 +205,8 @@ def retrieveCapacity(request, user):
     
 class updateCapacity(APIView):
     serializer_class = CapacitySerializer
+    parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [AllowAny]
 
     def get_object(self, user_id):
         try:
@@ -389,7 +396,7 @@ class HostingExperienceCreateView(APIView):
 def retrieveHosted(request, user):
     try:
         basic = HostingExperience.objects.get(user=user)
-    except Trade.DoesNotExist:
+    except HostingExperience.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
         serializer = HostingExperienceSerializer(basic)
@@ -426,12 +433,13 @@ class postMore(APIView):
     def post(self, request, format=None):
         user = request.data.get("user")
         if AdditionalInformation.objects.filter(user=user).exists():
-           return Response({"error":"You Arleady Provided these Details!"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error":"You Already Provided these Details!"}, status=status.HTTP_400_BAD_REQUEST)
         serializers = AdditionalSerializer(data=request.data)
         if serializers.is_valid():
-            serializers.save()
+            additional_info = serializers.save()
+            send_welcome_email(additional_info.user)  # Pass the actual user object
             return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
     
 @api_view(['GET'])
 def retrieveAdd(request, user):
@@ -479,3 +487,10 @@ class ChangePasswordView(APIView):
             return Response({"message": "Password updated successfully"}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+def send_welcome_email(user):
+    subject = "Welcome to Grow"
+    message = f"Dear {user.username},\n\nWelcome to our school system. Your username is {user.email}."
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [user.email]
+    send_mail(subject, message, from_email, to_email, fail_silently=False)

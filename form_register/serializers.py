@@ -6,6 +6,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.db import IntegrityError
+from django.core.mail import send_mail
+from django.conf import settings
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -98,39 +100,39 @@ class CategorySerializer(serializers.ModelSerializer):
         model = EmployeeCategory
         fields = '__all__'
 
-# trade serializer
-class TradeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Trade
-        fields = '__all__'
-
 # hosting serializers
 class WorkPlacementCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkPlacementCourse
-        fields = ['id', 'user','sn', 'course_name', 'duration']
+        fields = ['id', 'user','module_code', 'module_name', 'duration']
 
-class HostingExperienceSerializer(serializers.ModelSerializer):
+# trade serializer
+class TradeSerializer(serializers.ModelSerializer):
     courses = WorkPlacementCourseSerializer(many=True)
 
     class Meta:
-        model = HostingExperience
-        fields = ['id', 'user','has_hosted_apprentices', 'experience_details', 'max_apprentices', 'support_description', 'courses']
+        model = Trade
+        fields = ["id", "user", "targeted_trade","reason_for_partnership", "enterprise_size", "dev_stage", "track_record","expertise","staff_mentoring","infrastructure","sector_description", "courses"]
 
     def create(self, validated_data):
         courses_data = validated_data.pop('courses')
-        hosting_experience = HostingExperience.objects.create(**validated_data)
+        trade = Trade.objects.create(**validated_data)
         for course_data in courses_data:
-            WorkPlacementCourse.objects.create(hosting_experience=hosting_experience, **course_data)
-        return hosting_experience
+            WorkPlacementCourse.objects.create(trade=trade, **course_data)
+        return trade
     
-
+    
     def update(self, instance, validated_data):
         courses_data = validated_data.pop('courses')
-        instance.has_hosted_apprentices = validated_data.get('has_hosted_apprentices', instance.has_hosted_apprentices)
-        instance.experience_details = validated_data.get('experience_details', instance.experience_details)
-        instance.max_apprentices = validated_data.get('max_apprentices', instance.max_apprentices)
-        instance.support_description = validated_data.get('support_description', instance.support_description)
+        instance.targeted_trade = validated_data.get('targeted_trade', instance.targeted_trade)
+        instance.reason_for_partnership = validated_data.get('reason_for_partnership', instance.reason_for_partnership)
+        instance.enterprise_size = validated_data.get('enterprise_size', instance.enterprise_size)
+        instance.dev_stage = validated_data.get('dev_stage', instance.dev_stage)
+        instance.track_record = validated_data.get('track_record', instance.track_record)
+        instance.expertise = validated_data.get('expertise', instance.expertise)
+        instance.staff_mentoring= validated_data.get('staff_mentoring', instance.staff_mentoring)
+        instance.infrastructure= validated_data.get('infrastructure', instance.infrastructure)
+        instance.sector_description= validated_data.get('sector_description', instance.sector_description)
         instance.save()
 
         # Updating the courses
@@ -152,15 +154,27 @@ class HostingExperienceSerializer(serializers.ModelSerializer):
                 course.duration = course_data.get('duration', course.duration)
                 course.save()
             else:
-                WorkPlacementCourse.objects.create(hosting_experience=instance, **course_data)
+                WorkPlacementCourse.objects.create(trade=instance, **course_data)
 
         return instance
 
+class HostingExperienceSerializer(serializers.ModelSerializer):
+  
+    class Meta:
+        model = HostingExperience
+        fields = '__all__'
 # additional information
 class AdditionalSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdditionalInformation
         fields = '__all__'
+
+    def send_welcome_email(self, teacher):
+        subject = "Welcome to the School Management System"
+        message = f"Dear {teacher.user.username},\n\nWelcome to our school system. Your username is {teacher.email} and password is {teacher.user.password}"
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [teacher.email]
+        send_mail(subject, message, from_email, to_email, fail_silently=False)
 
 # change password
 class ChangePasswordSerializer(serializers.Serializer):

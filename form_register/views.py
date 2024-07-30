@@ -494,3 +494,14 @@ def send_welcome_email(user):
     from_email = settings.EMAIL_HOST_USER
     to_email = [user.email]
     send_mail(subject, message, from_email, to_email, fail_silently=False)
+
+    
+@api_view(['GET'])
+def retrieveUserInfo(request, pk):
+    try:
+        user_info = BasicInformation.objects.get(user=pk)
+    except BasicInformation.DoesNotExist:
+        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = UserInfoSerializer(user_info)
+    return Response(serializer.data)

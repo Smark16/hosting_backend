@@ -6,8 +6,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.db import IntegrityError
-from django.core.mail import send_mail
-from django.conf import settings
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -169,13 +168,6 @@ class AdditionalSerializer(serializers.ModelSerializer):
         model = AdditionalInformation
         fields = '__all__'
 
-    def send_welcome_email(self, teacher):
-        subject = "Welcome to the School Management System"
-        message = f"Dear {teacher.user.username},\n\nWelcome to our school system. Your username is {teacher.email} and password is {teacher.user.password}"
-        from_email = settings.EMAIL_HOST_USER
-        to_email = [teacher.email]
-        send_mail(subject, message, from_email, to_email, fail_silently=False)
-
 # change password
 class ChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
@@ -211,3 +203,49 @@ class ChangePasswordSerializer(serializers.Serializer):
         instance.save()
 
         return instance
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+    physical_address = serializers.SerializerMethodField()
+    capacities = serializers.SerializerMethodField()
+    educations = serializers.SerializerMethodField()
+    categories = serializers.SerializerMethodField()
+    trades = serializers.SerializerMethodField()
+    hosting_experiences = serializers.SerializerMethodField()
+    additional_info = serializers.SerializerMethodField()
+
+    class Meta:
+        model = BasicInformation
+        fields = [
+            'id', 'user', 'NameOfTheIndustry', 'Telephone', 'WebsiteLink', 'ContactEmail',
+            'physical_address', 'capacities', 'educations', 
+            'categories', 'trades', 'hosting_experiences', 'additional_info'
+        ]
+
+    def get_physical_address(self, obj):
+        addresses = PhysicalAddress.objects.filter(user=obj.user)
+        return PhysicalSerializer(addresses, many=True).data
+
+    def get_capacities(self, obj):
+        capacities = Capacity.objects.filter(user=obj.user)
+        return CapacitySerializer(capacities, many=True).data
+
+    def get_educations(self, obj):
+        educations = EducationCount.objects.filter(user=obj.user)
+        return EducationSerializer(educations, many=True).data
+
+    def get_categories(self, obj):
+        categories = EmployeeCategory.objects.filter(user=obj.user)
+        return CategorySerializer(categories, many=True).data
+
+    def get_trades(self, obj):
+        trades = Trade.objects.filter(user=obj.user)
+        return TradeSerializer(trades, many=True).data
+
+    def get_hosting_experiences(self, obj):
+        hosting_experiences = HostingExperience.objects.filter(user=obj.user)
+        return HostingExperienceSerializer(hosting_experiences, many=True).data
+
+    def get_additional_info(self, obj):
+        additional_info = AdditionalInformation.objects.filter(user=obj.user)
+        return AdditionalSerializer(additional_info, many=True).data

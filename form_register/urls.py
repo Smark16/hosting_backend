@@ -57,4 +57,7 @@ urlpatterns = [
      path("retrive_add/<int:user>",views.retrieveAdd),
      path("update_add/<int:user_id>", views.updateAdd.as_view()),
 
+     #user details
+     path('retrieve_Info/<int:pk>', views.retrieveUserInfo),
+
 ]

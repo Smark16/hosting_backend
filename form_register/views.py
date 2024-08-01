@@ -490,7 +490,7 @@ class ChangePasswordView(APIView):
     
 def send_welcome_email(user):
     subject = "Welcome to Grow"
-    message = f"Dear {user.username},\n\nWelcome to our school system. Your username is {user.email}."
+    message = f"Dear {user.first_name},\n\nWelcome to Grow. Your Application has beeen successfully received thank you for applying with GROW we promise you all the best."
     from_email = settings.EMAIL_HOST_USER
     to_email = [user.email]
     send_mail(subject, message, from_email, to_email, fail_silently=False)

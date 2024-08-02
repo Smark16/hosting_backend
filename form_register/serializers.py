@@ -84,7 +84,7 @@ class PhysicalSerializer(serializers.ModelSerializer):
 class CapacitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Capacity
-        fields = '__all__'
+        fields = ['Date_Of_Registration', 'Registration_Number', 'certificate', 'Name_Of_The_Contact_Person', 'TelNo_Of_The_Contact_Person', 'Title_Of_The_Contact_Person', 'reason', 'user']
 
 
 # education serializers

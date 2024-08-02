@@ -15,7 +15,7 @@ class PyhsicalAdmin(admin.ModelAdmin):
     list_display = ["id", "user","District", "Constituency", "Sub_county", "Parish", "Village", "GPS_Points"]
 
 class CapacityAdmin(admin.ModelAdmin):
-    list_display = ["id", "Date_Of_Registration","certificate", "Registration_Number", "Name_Of_The_Contact_Person", "TelNo_Of_The_Contact_Person", "Title_Of_The_Contact_Person","reason"]
+    list_display = ["id","reason","Date_Of_Registration","certificate", "Registration_Number", "Name_Of_The_Contact_Person", "TelNo_Of_The_Contact_Person", "Title_Of_The_Contact_Person"]
 
 class educationAdmin(admin.ModelAdmin):
     list_display = ["id", "No_Formal_Education", "PLE", "UCE","UACE","Certificate","Diploma","Degree","Post_Graduate", "Total"]

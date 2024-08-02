@@ -90,17 +90,13 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'institute_e5fn',
-        'USER':'institute_e5fn_user',
-        'PASSWORD':'xzXMl5yTenpWVmBM3ohfvNcE2F6gkcYk',
-        'HOST':'dpg-cq5r0n08fa8c738bukh0-a.oregon-postgres.render.com',
+        'NAME': 'institute_6kcm',
+        'USER':'institute_6kcm_user',
+        'PASSWORD':'SvDMgmtlD5gR2aaAYWhEwoCEmfrVYKFR',
+        'HOST':'dpg-cqm8qa1u0jms73fno1tg-a.oregon-postgres.render.com',
         'PORT':'5432',
     }
 }
-#database_url = os.environ.get("DATABASE_URL")
-#DATABASES['default'] = dj_database_url.parse(database_url)
-#DATABASES["default"] = dj_database_url.parse("postgresql://institute_e5fn_user:xzXMl5yTenpWVmBM3ohfvNcE2F6gkcYk@dpg-cq5r0n08fa8c738bukh0-a.oregon-postgres.render.com/institute_e5fn") 
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

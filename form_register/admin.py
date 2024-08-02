@@ -41,6 +41,9 @@ class AdditionalAdmin(admin.ModelAdmin):
     list_editable = ("verified",)
     list_display = ["id", "additionalComments", "fullName", "organizationName", "verified"]
 
+class FileAdmin(admin.ModelAdmin):
+    list_display = ['id','name', 'user']
+
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserAccount, userAdmin)
@@ -53,3 +56,4 @@ admin.site.register(Trade, TradeAdmin)
 admin.site.register(HostingExperience, HostingExperienceAdmin)
 admin.site.register(WorkPlacementCourse, WorkAdmin)
 admin.site.register(AdditionalInformation, AdditionalAdmin)
+admin.site.register(Files,FileAdmin)

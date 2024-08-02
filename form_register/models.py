@@ -57,10 +57,14 @@ class PhysicalAddress(models.Model):
      Village = models.CharField(max_length=100)
      GPS_Points = models.CharField(max_length=100)
 
+class Files(models.Model):
+    name = models.FileField(upload_to='files/')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 class Capacity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Date_Of_Registration = models.DateField(null=True, blank=True)
-    certificate = models.FileField(upload_to='files/')
+    certificate = models.ForeignKey(Files, null=True, blank=True, on_delete=models.SET_NULL)
     Registration_Number = models.CharField(max_length=200, null=True, blank=True)
     Name_Of_The_Contact_Person = models.CharField(max_length=200, null=True, blank=True)
     TelNo_Of_The_Contact_Person = models.PositiveBigIntegerField(validators=[MaxValueValidator(999999999999)], null=True, blank=True)

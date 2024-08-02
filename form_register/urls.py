@@ -60,4 +60,10 @@ urlpatterns = [
      #user details
      path('retrieve_Info/<int:pk>', views.retrieveUserInfo),
 
+      #file urls
+    path("all_files", views.AllFiles.as_view()),
+    path("upload_file", views.UploadFile.as_view()),
+    path("update_file/<int:user_id>", views.updateFile.as_view()),
+    path("retrieve_File/<int:user>", views.retrieve_File)
+
 ]

@@ -505,3 +505,57 @@ def retrieveUserInfo(request, pk):
 
     serializer = UserInfoSerializer(user_info)
     return Response(serializer.data)
+
+class AllFiles(generics.ListAPIView):
+    queryset = Files.objects.all()
+    serializer_class = FileSerializer
+
+class UploadFile(APIView):
+    permission_classes = [AllowAny]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, format=None):
+        user = request.data.get("user")
+        if Files.objects.filter(user=user).exists():
+            return Response({"error":"You Already uploaded a file!"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = FileSerializer(data=request.data)
+        if serializer.is_valid():
+            file_instance = serializer.save()
+            file_url = request.build_absolute_uri(file_instance.name.url)
+            return Response({
+                "file_id": file_instance.id,
+                "file_url": file_url
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class updateFile(APIView):
+    serializer_class = FileSerializer
+
+    def get_object(self, user_id):
+        try:
+            return Files.objects.get(user=user_id)
+        except Files.DoesNotExist:
+            return None
+
+    def put(self, request, user_id):
+        instance = self.get_object(user_id)
+        if not instance:
+            return Response({"error": "Basic information not found for this user."}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = self.serializer_class(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def retrieve_File(request, user):
+    try:
+       file = Files.objects.get(user=user)
+    except Files.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = FileSerializer(file)
+        return Response(serializer.data)
+    

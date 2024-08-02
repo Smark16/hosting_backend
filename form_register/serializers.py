@@ -249,3 +249,8 @@ class UserInfoSerializer(serializers.ModelSerializer):
     def get_additional_info(self, obj):
         additional_info = AdditionalInformation.objects.filter(user=obj.user)
         return AdditionalSerializer(additional_info, many=True).data
+    
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Files
+        fields = '__all__'

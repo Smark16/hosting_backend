@@ -144,6 +144,20 @@ class WorkPlacementCourse(models.Model):
     def __str__(self):
         return f"{self.module_code} - {self.module_name} ({self.duration})"
 
+class Environment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    environmentalWasteManagement = models.CharField(max_length=400)
+    environmentalConservation = models.CharField(max_length=400)
+    socialCommunityEngagement= models.CharField(max_length=400)
+    socialLocalSuppliers= models.CharField(max_length=400)
+    socialCSRInitiatives= models.CharField(max_length=400)
+    safetyHealthPolicy= models.CharField(max_length=400)
+    safetyCommunication= models.CharField(max_length=400, null=True, blank=True)
+    safetyEmergencyProcedures= models.CharField(max_length=400)
+    safetySafeEnvironment= models.CharField(max_length=400)
+    healthHygieneSanitation= models.CharField(max_length=400)
+    healthWellnessPrograms= models.CharField(max_length=400)
+
 class AdditionalInformation(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)
    additionalComments= models.TextField()

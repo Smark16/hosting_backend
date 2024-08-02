@@ -254,3 +254,8 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Files
         fields = '__all__'
+
+class EnvironmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Environment
+        fields = '__all__'

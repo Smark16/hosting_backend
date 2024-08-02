@@ -559,3 +559,52 @@ def retrieve_File(request, user):
         serializer = FileSerializer(file)
         return Response(serializer.data)
     
+#Enviroment
+class EnvironmentView(generics.ListAPIView):
+    queryset = Environment
+    serializer_class = EnvironmentSerializer
+
+class postEnvironment(APIView):
+    serializer_class = EnvironmentSerializer
+
+    def post(self, request, format=None):
+        user = request.data.get("user")
+        if Environment.objects.filter(user=user).exists():
+            return Response({"error":"You Already Provided these Details!"}, status=status.HTTP_400_BAD_REQUEST)
+        serializers = EnvironmentSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
+    
+@api_view(['GET'])
+def retrieveEnv(request, user):
+    try:
+        basic = Environment.objects.get(user=user)
+    except Environment.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        serializer = EnvironmentSerializer(basic)
+        return Response(serializer.data)
+    
+class updateEnv(APIView):
+    serializer_class = EnvironmentSerializer
+
+    def get_object(self, user_id):
+        try:
+            return Environment.objects.get(user=user_id)
+        except Environment.DoesNotExist:
+            return None
+
+    def put(self, request, user_id):
+        instance = self.get_object(user_id)
+        if not instance:
+            return Response({"error": "Information not found for this user."}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = self.serializer_class(instance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    

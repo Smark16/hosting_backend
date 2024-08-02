@@ -64,6 +64,13 @@ urlpatterns = [
     path("all_files", views.AllFiles.as_view()),
     path("upload_file", views.UploadFile.as_view()),
     path("update_file/<int:user_id>", views.updateFile.as_view()),
-    path("retrieve_File/<int:user>", views.retrieve_File)
+    path("retrieve_File/<int:user>", views.retrieve_File),
+
+    #environment URLS
+    path("all_Env", views.EnvironmentView.as_view()),
+    path("post_env", views.postEnvironment.as_view()),
+    path("update_env/<int:user_id>", views.updateEnv.as_view()),
+    path("retrieve_env/<int:user>", views.retrieveEnv)
+
 
 ]

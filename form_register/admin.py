@@ -44,6 +44,19 @@ class AdditionalAdmin(admin.ModelAdmin):
 class FileAdmin(admin.ModelAdmin):
     list_display = ['id','name', 'user']
 
+class EnvironmentAdmin(admin.ModelAdmin):
+    list_display = ["user","environmentalWasteManagement",
+                    "environmentalConservation",
+                    "socialCommunityEngagement",
+    "socialLocalSuppliers",
+    "socialCSRInitiatives",
+    "safetyHealthPolicy",
+    "safetyCommunication",
+    "safetyEmergencyProcedures",
+    "safetySafeEnvironment",
+    "healthHygieneSanitation",
+    "healthWellnessPrograms"]
+
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserAccount, userAdmin)
@@ -57,3 +70,4 @@ admin.site.register(HostingExperience, HostingExperienceAdmin)
 admin.site.register(WorkPlacementCourse, WorkAdmin)
 admin.site.register(AdditionalInformation, AdditionalAdmin)
 admin.site.register(Files,FileAdmin)
+admin.site.register(Environment, EnvironmentAdmin)

@@ -146,17 +146,9 @@ class WorkPlacementCourse(models.Model):
 
 class Environment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    environmentalWasteManagement = models.CharField(max_length=400)
-    environmentalConservation = models.CharField(max_length=400)
-    socialCommunityEngagement= models.CharField(max_length=400)
-    socialLocalSuppliers= models.CharField(max_length=400)
-    socialCSRInitiatives= models.CharField(max_length=400)
-    safetyHealthPolicy= models.CharField(max_length=400)
-    safetyCommunication= models.CharField(max_length=400, null=True, blank=True)
-    safetyEmergencyProcedures= models.CharField(max_length=400)
-    safetySafeEnvironment= models.CharField(max_length=400)
-    healthHygieneSanitation= models.CharField(max_length=400)
-    healthWellnessPrograms= models.CharField(max_length=400)
+    Harrasment_Prevention = models.CharField(max_length=400)
+    provided_PPES = models.CharField(max_length=400)
+    Available_channels= models.CharField(max_length=400)
 
 class AdditionalInformation(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)

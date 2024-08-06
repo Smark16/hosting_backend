@@ -45,17 +45,9 @@ class FileAdmin(admin.ModelAdmin):
     list_display = ['id','name', 'user']
 
 class EnvironmentAdmin(admin.ModelAdmin):
-    list_display = ["user","environmentalWasteManagement",
-                    "environmentalConservation",
-                    "socialCommunityEngagement",
-    "socialLocalSuppliers",
-    "socialCSRInitiatives",
-    "safetyHealthPolicy",
-    "safetyCommunication",
-    "safetyEmergencyProcedures",
-    "safetySafeEnvironment",
-    "healthHygieneSanitation",
-    "healthWellnessPrograms"]
+    list_display = ["user","Harrasment_Prevention",
+                    "provided_PPES",
+                    "Available_channels"]
 
 
 admin.site.register(Profile, ProfileAdmin)

@@ -109,6 +109,7 @@ class Trade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     targeted_trade = models.CharField(max_length=255)
     reason_for_partnership = models.TextField()
+    skills = models.JSONField(null=True, blank=True)
     enterprise_size = models.CharField(max_length=255)
     dev_stage = models.CharField(max_length=255)
     track_record = models.TextField()
@@ -159,3 +160,60 @@ class AdditionalInformation(models.Model):
 
    def __str__(self):
         return f'{self.fullName } - {self.organizationName}'
+
+class Agriculture(models.Model):
+    name = models.CharField(max_length=255)
+
+class AgroProcessing(models.Model):
+    name = models.CharField(max_length=255)
+
+class Creative_and_Performing_Art(models.Model):
+    name = models.CharField(max_length=255)
+    
+class Hotel_and_Hospitality(models.Model):
+    name = models.CharField(max_length=255)
+
+class Beauty_and_Cosmetology(models.Model):
+    name = models.CharField(max_length=255)
+
+class Manufacturing(models.Model):
+    name = models.CharField(max_length=255)
+
+class Construction(models.Model):
+    name = models.CharField(max_length=255)
+
+class Food_Processing(models.Model):
+    name = models.CharField(max_length=255)
+
+class Social_Services(models.Model):
+    name = models.CharField(max_length=255)
+
+class Professional_TechnicalServices(models.Model):
+    name = models.CharField(max_length=255)
+
+class Engineering(models.Model):
+    name = models.CharField(max_length=255)
+
+class Tourism_and_Hospitality(models.Model):
+    name = models.CharField(max_length=255)
+
+class Environment_Protection(models.Model):
+    name = models.CharField(max_length=255)
+
+class Fishing(models.Model):
+    name = models.CharField(max_length=255)
+
+class ICT_and_DigitalMedia(models.Model):
+    name = models.CharField(max_length=255)
+
+class TradeRetail_and_Wholesale(models.Model):
+    name = models.CharField(max_length=255)
+
+class Mechanical(models.Model):
+    name = models.CharField(max_length=255)
+
+class Tailoring_and_Textiles(models.Model):
+    name = models.CharField(max_length=255)
+
+
+

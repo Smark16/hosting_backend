@@ -70,7 +70,27 @@ urlpatterns = [
     path("all_Env", views.EnvironmentView.as_view()),
     path("post_env", views.postEnvironment.as_view()),
     path("update_env/<int:user_id>", views.updateEnv.as_view()),
-    path("retrieve_env/<int:user>", views.retrieveEnv)
+    path("retrieve_env/<int:user>", views.retrieveEnv),
+
+    #more urls
+    path('agriculture/', views.AgricultureListView.as_view(), name='agriculture-list'),
+    path('agro-processing/', views.AgroProcessingListView.as_view(), name='agro-processing-list'),
+    path('creative-performing-art/', views.Creative_and_Performing_ArtListView.as_view(), name='creative-performing-art-list'),
+    path('hotel-hospitality/', views.Hotel_and_HospitalityListView.as_view(), name='hotel-hospitality-list'),
+    path('beauty-cosmetology/', views.Beauty_and_CosmetologyListView.as_view(), name='beauty-cosmetology-list'),
+    path('manufacturing/', views.ManufacturingListView.as_view(), name='manufacturing-list'),
+    path('construction/', views.ConstructionListView.as_view(), name='construction-list'),
+    path('food-processing/', views.Food_ProcessingListView.as_view(), name='food-processing-list'),
+    path('social-services/', views.Social_ServicesListView.as_view(), name='social-services-list'),
+    path('professional-technical-services/', views.Professional_TechnicalServicesListView.as_view(), name='professional-technical-services-list'),
+    path('engineering/', views.EngineeringListView.as_view(), name='engineering-list'),
+    path('tourism-hospitality/', views.Tourism_and_HospitalityListView.as_view(), name='tourism-hospitality-list'),
+    path('environment-protection/', views.Environment_ProtectionListView.as_view(), name='environment-protection-list'),
+    path('fishing/', views.FishingListView.as_view(), name='fishing-list'),
+    path('ict-digital-media/', views.ICT_and_DigitalMediaListView.as_view(), name='ict-digital-media-list'),
+    path('trade-retail-wholesale/', views.TradeRetail_and_WholesaleListView.as_view(), name='trade-retail-wholesale-list'),
+    path('mechanical/', views.MechanicalListView.as_view(), name='mechanical-list'),
+    path('tailoring-textiles/', views.Tailoring_and_TextilesListView.as_view(), name='tailoring-textiles-list'),
 
 
 ]

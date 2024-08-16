@@ -607,4 +607,77 @@ class updateEnv(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class AgricultureListView(generics.ListCreateAPIView):
+    queryset = Agriculture.objects.all()
+    serializer_class = AgricultureSerializer
+
+class AgroProcessingListView(generics.ListCreateAPIView):
+    queryset = AgroProcessing.objects.all()
+    serializer_class = AgroProcessingSerializer
+
+class Creative_and_Performing_ArtListView(generics.ListCreateAPIView):
+    queryset = Creative_and_Performing_Art.objects.all()
+    serializer_class = Creative_and_Performing_ArtSerializer
+
+class Hotel_and_HospitalityListView(generics.ListCreateAPIView):
+    queryset = Hotel_and_Hospitality.objects.all()
+    serializer_class = Hotel_and_HospitalitySerializer
+
+class Beauty_and_CosmetologyListView(generics.ListCreateAPIView):
+    queryset = Beauty_and_Cosmetology.objects.all()
+    serializer_class = Beauty_and_CosmetologySerializer
+
+class ManufacturingListView(generics.ListCreateAPIView):
+    queryset = Manufacturing.objects.all()
+    serializer_class = ManufacturingSerializer
+
+class ConstructionListView(generics.ListCreateAPIView):
+    queryset = Construction.objects.all()
+    serializer_class = ConstructionSerializer
+
+class Food_ProcessingListView(generics.ListCreateAPIView):
+    queryset = Food_Processing.objects.all()
+    serializer_class = Food_ProcessingSerializer
+
+class Social_ServicesListView(generics.ListCreateAPIView):
+    queryset = Social_Services.objects.all()
+    serializer_class = Social_ServicesSerializer
+
+class Professional_TechnicalServicesListView(generics.ListCreateAPIView):
+    queryset = Professional_TechnicalServices.objects.all()
+    serializer_class = Professional_TechnicalServicesSerializer
+
+class EngineeringListView(generics.ListCreateAPIView):
+    queryset = Engineering.objects.all()
+    serializer_class = EngineeringSerializer
+
+class Tourism_and_HospitalityListView(generics.ListCreateAPIView):
+    queryset = Tourism_and_Hospitality.objects.all()
+    serializer_class = Tourism_and_HospitalitySerializer
+
+class Environment_ProtectionListView(generics.ListCreateAPIView):
+    queryset = Environment_Protection.objects.all()
+    serializer_class = Environment_ProtectionSerializer
+    
+
+class FishingListView(generics.ListCreateAPIView):
+    queryset = Fishing.objects.all()
+    serializer_class = FishingSerializer
+
+class ICT_and_DigitalMediaListView(generics.ListCreateAPIView):
+    queryset = ICT_and_DigitalMedia.objects.all()
+    serializer_class = ICT_and_DigitalMediaSerializer
+
+class TradeRetail_and_WholesaleListView(generics.ListCreateAPIView):
+    queryset = TradeRetail_and_Wholesale.objects.all()
+    serializer_class = TradeRetail_and_WholesaleSerializer
+
+class MechanicalListView(generics.ListCreateAPIView):
+    queryset = Mechanical.objects.all()
+    serializer_class = MechanicalSerializer
+
+class Tailoring_and_TextilesListView(generics.ListCreateAPIView):
+    queryset = Tailoring_and_Textiles.objects.all()
+    serializer_class = Tailoring_and_TextilesSerializer
+
     

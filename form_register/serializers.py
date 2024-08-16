@@ -111,7 +111,7 @@ class TradeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trade
-        fields = ["id", "user", "targeted_trade","reason_for_partnership", "enterprise_size", "dev_stage", "track_record","expertise","staff_mentoring","infrastructure","sector_description", "courses"]
+        fields = ["id", "user", "targeted_trade","reason_for_partnership",'skills', "enterprise_size", "dev_stage", "track_record","expertise","staff_mentoring","infrastructure","sector_description", "courses"]
 
     def create(self, validated_data):
         courses_data = validated_data.pop('courses')
@@ -258,4 +258,94 @@ class FileSerializer(serializers.ModelSerializer):
 class EnvironmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Environment
+        fields = '__all__'
+
+class AgricultureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Agriculture
+        fields = '__all__'
+
+class AgroProcessingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AgroProcessing
+        fields = '__all__'
+
+class Creative_and_Performing_ArtSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Creative_and_Performing_Art
+        fields = '__all__'
+
+class Hotel_and_HospitalitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hotel_and_Hospitality
+        fields = '__all__'
+
+class Beauty_and_CosmetologySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Beauty_and_Cosmetology
+        fields = '__all__'
+
+class ManufacturingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Manufacturing
+        fields = '__all__'
+
+class ConstructionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Construction
+        fields = '__all__'
+
+class Food_ProcessingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Food_Processing
+        fields = '__all__'
+
+class Social_ServicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Social_Services
+        fields = '__all__'
+
+class Professional_TechnicalServicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Professional_TechnicalServices
+        fields = '__all__'
+
+class EngineeringSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Engineering
+        fields = '__all__'
+
+class Tourism_and_HospitalitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tourism_and_Hospitality
+        fields = '__all__'
+
+class Environment_ProtectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Environment_Protection
+        fields = '__all__'
+
+class FishingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fishing
+        fields = '__all__'
+
+class ICT_and_DigitalMediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ICT_and_DigitalMedia
+        fields = '__all__'
+
+class TradeRetail_and_WholesaleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TradeRetail_and_Wholesale
+        fields = '__all__'
+
+class MechanicalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mechanical
+        fields = '__all__'
+
+class Tailoring_and_TextilesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tailoring_and_Textiles
         fields = '__all__'

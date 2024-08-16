@@ -49,6 +49,9 @@ class EnvironmentAdmin(admin.ModelAdmin):
                     "provided_PPES",
                     "Available_channels"]
 
+class AgriAdmin(admin.ModelAdmin):
+    list_display = ["id", "name"]
+
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserAccount, userAdmin)
@@ -63,3 +66,21 @@ admin.site.register(WorkPlacementCourse, WorkAdmin)
 admin.site.register(AdditionalInformation, AdditionalAdmin)
 admin.site.register(Files,FileAdmin)
 admin.site.register(Environment, EnvironmentAdmin)
+admin.site.register(Agriculture, AgriAdmin)
+admin.site.register(AgroProcessing)
+admin.site.register(Creative_and_Performing_Art)
+admin.site.register(Hotel_and_Hospitality)
+admin.site.register(Beauty_and_Cosmetology)
+admin.site.register(Manufacturing)
+admin.site.register(Construction)
+admin.site.register(Food_Processing)
+admin.site.register(Social_Services)
+admin.site.register(Professional_TechnicalServices)
+admin.site.register(Engineering)
+admin.site.register(Tourism_and_Hospitality)
+admin.site.register(Environment_Protection)
+admin.site.register(Fishing)
+admin.site.register(ICT_and_DigitalMedia)
+admin.site.register(TradeRetail_and_Wholesale)
+admin.site.register(Mechanical)
+admin.site.register(Tailoring_and_Textiles)

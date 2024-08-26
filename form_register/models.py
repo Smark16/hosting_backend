@@ -215,5 +215,9 @@ class Mechanical(models.Model):
 class Tailoring_and_Textiles(models.Model):
     name = models.CharField(max_length=255)
 
+# finishing
+class Finish(models.Model):
+    name = models.TextField(max_length=255, default="This message is to confirm that your application for the Grow Host Instutions vacancy has been received successfully. A confirmation e-mail has been sent to you Regards, GROW Team")
+
 
 

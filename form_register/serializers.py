@@ -349,3 +349,8 @@ class Tailoring_and_TextilesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tailoring_and_Textiles
         fields = '__all__'
+
+class FinishSerialier(serializers.ModelSerializer):
+    class Meta:
+        model = Finish
+        fields = '__all__'

@@ -92,5 +92,7 @@ urlpatterns = [
     path('mechanical/', views.MechanicalListView.as_view(), name='mechanical-list'),
     path('tailoring-textiles/', views.Tailoring_and_TextilesListView.as_view(), name='tailoring-textiles-list'),
 
+# finshed
+    path("finished", views.finished.as_view()),
 
 ]

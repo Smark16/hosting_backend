@@ -680,4 +680,6 @@ class Tailoring_and_TextilesListView(generics.ListCreateAPIView):
     queryset = Tailoring_and_Textiles.objects.all()
     serializer_class = Tailoring_and_TextilesSerializer
 
-    
+class finished(generics.ListAPIView):
+    queryset = Finish.objects.all()
+    serializer_class = FinishSerialier

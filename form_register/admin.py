@@ -52,7 +52,10 @@ class EnvironmentAdmin(admin.ModelAdmin):
 class AgriAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
 
+class FinishAdmin(admin.ModelAdmin):
+    list_display = ["id", "name"]
 
+admin.site.register(Finish, FinishAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserAccount, userAdmin)
 admin.site.register(BasicInformation, BasicAdmin)
